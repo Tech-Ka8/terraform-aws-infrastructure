@@ -62,7 +62,7 @@ resource "aws_route_table_association" "a" {
 
 #Create security group to allow port 22,80,443
 
-resource "aws_security_group" "allow_web" {
+resource "aws_security_group" "allow_tls" {
   name        = "allow_web-traffic"
   description = "Allow web inbound traffic and all outbound traffic"
   vpc_id      = aws_vpc.prod-vpc.id
@@ -98,5 +98,20 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv6" {
   ip_protocol       = "-1" # semantically equivalent to all ports
 }
 #Create a network interface with an ip in the subnet that was created in step 4
+
+resource "aws_network_interface" "web-server-nic" {
+  subnet_id       = aws_subnet.subnet-1.id
+  private_ips     = ["10.0.1.50"]
+  security_groups = [aws_security_group.allow_tls.id]
+
+
+}
+
 #Assign an elastic IP to the network interface created in step 7
+
+resource "aws_eip" "one" {
+  domain                    = "vpc"
+  network_interface         = aws_network_interface.web-server-nic.id
+  associate_with_private_ip = "10.0.1.50"
+}
 #Create Ubuntu server and install/enable Apache2
