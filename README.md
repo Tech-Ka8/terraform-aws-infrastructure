@@ -12,7 +12,7 @@ The project includes:
 
 - **Amazon VPC:** Provides an isolated virtual network.
 - **Subnet:** Hosts the network interface and web server within the VPC.
-- **Internet Gateway:** Provides a route for internet connectivity.
+- **Internet Gateway:** Enables internet connectivity through the VPC's routing configuration.
 - **Route Table and Association:** Configures routing through the Internet Gateway.
 - **Security Group:** Controls inbound and outbound network traffic.
 - **Network Interface:** Provides network connectivity for the EC2 instance.
@@ -27,6 +27,23 @@ The project includes:
 - Git and GitHub
 - Apache HTTP Server
 - Linux and Bash
+
+## Project Structure
+
+```text
+terraform-aws-infrastructure/
+├── .gitignore
+├── .terraform.lock.hcl
+├── README.md
+└── main.tf
+```
+
+### File Descriptions
+
+- **`.gitignore`** — Specifies files and directories Git should ignore.
+- **`.terraform.lock.hcl`** — Records the selected Terraform provider versions and checksums.
+- **`README.md`** — Documents the project, architecture, implementation, and lessons learned.
+- **`main.tf`** — Contains the Terraform configuration used to provision the AWS infrastructure.
 
 ## What I Did
 
@@ -55,15 +72,15 @@ The Terraform-managed infrastructure was destroyed after testing. The project co
 
 ## Security Notes
 
-- Do not commit AWS access keys, secret keys, private keys, or other credentials.
-- Do not commit Terraform state files or sensitive variable files.
+- Never commit AWS access keys, secret keys, private keys, or other credentials.
+- Avoid committing Terraform state files or sensitive variable files.
 - Restrict inbound access to only the IP addresses and ports required for your use case.
 - Review AWS billing and resource usage after completing cloud experiments.
 
 ## Future Improvements
 
 - Add an architecture diagram.
-- Improve security rules and document the design decisions.
+- Improve security rules and document design decisions.
 - Explore automated validation and deployment workflows.
 - Add screenshots demonstrating the successful deployment.
 
